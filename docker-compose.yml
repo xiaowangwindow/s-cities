@@ -1,0 +1,8 @@
+version: "3"
+services:
+    scrapy-webpage:
+        container_name: scrapy-cities
+        image: scrapy:cities
+        build: ./
+        volumes:
+            - .:/usr/src/app
