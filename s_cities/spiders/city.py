@@ -20,7 +20,8 @@ class CitySpider(scrapy.Spider):
     name = "city"
 
     continent_list = [
-        'Asia', 'Africa', 'America', 'Europe', 'Oceania'
+        'Asia',
+        # 'Africa', 'America', 'Europe', 'Oceania'
     ]
 
     def start_requests(self):

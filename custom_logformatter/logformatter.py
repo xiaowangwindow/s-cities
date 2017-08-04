@@ -1,7 +1,7 @@
 import logging
 from scrapy import logformatter
 
-class NoDropItemLogFormatter(logformatter.LogFormatter):
+class PoliteLogFormatter(logformatter.LogFormatter):
     def dropped(self, item, exception, response, spider):
         return {
             'level': logging.DEBUG,

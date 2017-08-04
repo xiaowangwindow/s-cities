@@ -36,16 +36,16 @@ CONCURRENT_REQUESTS_PER_DOMAIN = 32
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+# COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-#DEFAULT_REQUEST_HEADERS = {
-#   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-#   'Accept-Language': 'en',
-#}
+# DEFAULT_REQUEST_HEADERS = {
+    # 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36',
+    # 'Content-Type': 'application/json;charset=UTF-8',
+# }
 
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
@@ -61,7 +61,8 @@ DOWNLOADER_MIDDLEWARES = {
 }
 DOWNLOADERPROXY_ENABLED = True
 HTTP_PROXY = [
-    'http://127.0.0.1:8080',
+    # 'http://10.255.0.2:57777',
+    'http://localhost:8080'
 ]
 HTTPS_PROXY = HTTP_PROXY
 
@@ -74,8 +75,8 @@ HTTPS_PROXY = HTTP_PROXY
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    's_cities.pipelines.ScrapyCityPipeline': 300,
-    'sm_save_html_source.pipelines.SM_SaveHTMLSourcePipeline': 999,
+    'sm_save_html_source.pipelines.SM_SaveHTMLSourcePipeline': 1,
+    's_cities.pipelines_async.ScrapyCityPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -105,22 +106,22 @@ DOWNLOAD_TIMEOUT = 10
 # DEPTH_PRIORITY = -1
 
 LOG_LEVEL = 'DEBUG' if DEBUGGING else 'INFO'
-LOG_FORMATTER = 'custom_logformatter.logformatter.NoDropItemLogFormatter'
+LOG_FORMATTER = 'custom_logformatter.logformatter.PoliteLogFormatter'
 
 if DEBUGGING:
-    MONGODB_HOST = ''
+    MONGODB_HOST = 'localhost'
     MONGODB_PORT = 27017
     MONGODB_USER = None
     MONGODB_PASSWORD = None
 else:
     #TODO
-    MONGODB_HOST = ''
+    MONGODB_HOST = 'localhost'
     MONGODB_PORT = 27017
     MONGODB_USER = None
     MONGODB_PASSWORD = None
     pass
 
-MONGODB_DB = 'city'
+MONGODB_DB = 'test'
 MONGODB_COLL_RAW = 'scrapy_raw'
 MONGODB_COLL_ERROR = 'scrapy_error'
 MONGODB_URI = 'mongodb://{auth}{host}:{port}'.format(
